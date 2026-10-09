@@ -1,0 +1,122 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
+}
+
+body{
+    background:#f4f6fb;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.status-card{
+    background:#fff;
+    border-radius:18px;
+    box-shadow:0 8px 24px rgba(0,0,0,.08);
+    padding:50px 40px;
+    max-width:560px;
+    width:100%;
+    text-align:center;
+}
+
+.logo{
+    height:60px;
+    margin-bottom:20px;
+}
+
+.icon{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:38px;
+    margin:0 auto 24px;
+}
+
+.icon.pending{
+    background:#fff6e0;
+    color:#e0a300;
+}
+
+.icon.rejected{
+    background:#fdeeee;
+    color:#c0392b;
+}
+
+h1{
+    color:#111;
+    margin-bottom:12px;
+    font-size:24px;
+}
+
+.muted{
+    color:#666;
+    line-height:1.6;
+    margin-bottom:24px;
+}
+
+.summary{
+    background:#f7faff;
+    border-radius:12px;
+    padding:16px 20px;
+    text-align:left;
+    margin-bottom:24px;
+    color:#333;
+    font-size:14px;
+}
+
+.summary p{
+    margin:4px 0;
+}
+
+.reject-reason{
+    color:#c0392b;
+}
+
+.btn-primary{
+    background:#1d5bbf;
+    color:#fff;
+    border:none;
+    padding:12px 22px;
+    border-radius:10px;
+    font-weight:700;
+    cursor:pointer;
+    margin-bottom:14px;
+    width:100%;
+}
+
+.btn-primary:hover{
+    background:#15489a;
+}
+
+.btn-secondary{
+    background:#eef1f6;
+    color:#333;
+    border:none;
+    padding:12px 22px;
+    border-radius:10px;
+    font-weight:600;
+    cursor:pointer;
+    width:100%;
+    margin-bottom:10px;
+}
+
+.btn-secondary:hover{
+    background:#e2e6ee;
+}
+
+.logout-link{
+    background:none;
+    border:none;
+    color:#888;
+    cursor:pointer;
+    font-size:13px;
+    text-decoration:underline;
+}

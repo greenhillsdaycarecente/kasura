@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="g.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daycare Center - Sign Up</title>
+
+    <link rel="stylesheet" href="signup.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+</head>
+<body>
+
+<div class="page">
+
+    <div class="card">
+
+        <div class="brand">
+            <img src="g.png" alt="Greenhills Phase II Child Development Center" class="logo">
+            <h1>Create Account</h1>
+            <p class="subtitle"><span class="dot dot-green"></span> Parent / Guardian Registration <span class="dot dot-orange"></span></p>
+        </div>
+
+        <div id="formMessage" class="form-message" style="display:none;"></div>
+
+        <form id="signupForm">
+
+            <div class="form-grid">
+
+                <div class="input-group">
+                    <label>Full Name (Parent)</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="fullName" placeholder="Enter full name" data-auto-uppercase="true">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="email" placeholder="Enter email address">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Contact Number</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-phone"></i>
+                        <input type="text" id="contact" placeholder="Enter contact number" data-auto-uppercase="true">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Address</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-house"></i>
+                        <input type="text" id="address" placeholder="Enter your address" data-auto-uppercase="true">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="guardian-label">
+                        <span>Parent/Guardian Name</span>
+                        <span class="same-name-option">
+                            <input type="checkbox" id="sameAsFullName">
+                            <span>Same as Full Name (Parent)</span>
+                        </span>
+                    </label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="guardianName" placeholder="Enter guardian name" data-auto-uppercase="true">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Username</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-user-tag"></i>
+                        <input type="text" id="username" placeholder="Choose username">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" placeholder="Create password">
+                        <i class="fa-solid fa-eye toggle-pwd" id="togglePassword" onclick="togglePasswordField('password','togglePassword')"></i>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Confirm Password</label>
+                    <div class="input-wrap">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="confirmPassword" placeholder="Confirm password">
+                        <i class="fa-solid fa-eye toggle-pwd" id="toggleConfirmPassword" onclick="togglePasswordField('confirmPassword','toggleConfirmPassword')"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="note-box">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>
+                    Only parents or guardians can create an account.
+                    Administrator approval is required.
+                </span>
+            </div>
+
+            <button type="button" class="register-btn" onclick="register()">
+                <i class="fa-solid fa-user-plus"></i>
+                Register Account
+            </button>
+
+        </form>
+
+        <div class="login-link">
+            Already have an account?
+            <a href="index.html">Login</a>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase.js"></script>
+<script src="db.js"></script>
+<script>
+function togglePasswordField(inputId, iconId){
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
+    if(input.type === 'password'){
+        input.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
+const fullNameInput = document.getElementById('fullName');
+const guardianNameInput = document.getElementById('guardianName');
+const sameAsFullNameCheckbox = document.getElementById('sameAsFullName');
+
+function syncGuardianName(){
+    if(sameAsFullNameCheckbox.checked){
+        guardianNameInput.value = fullNameInput.value;
+    }
+}
+
+sameAsFullNameCheckbox.addEventListener('change', function(){
+    if(this.checked){
+        guardianNameInput.value = fullNameInput.value;
+        guardianNameInput.readOnly = true;
+        guardianNameInput.classList.add('same-name-locked');
+    } else {
+        guardianNameInput.readOnly = false;
+        guardianNameInput.classList.remove('same-name-locked');
+        guardianNameInput.focus();
+    }
+});
+
+fullNameInput.addEventListener('input', syncGuardianName);
+
+function showMessage(text, type){
+    const box = document.getElementById('formMessage');
+    box.textContent = text;
+    box.className = 'form-message ' + (type || 'error');
+    box.style.display = 'block';
+}
+
+async function register(){
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const contact = document.getElementById('contact').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const guardianName = document.getElementById('guardianName').value.trim();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if(!fullName || !email || !contact || !address || !guardianName || !username || !password || !confirmPassword){
+        showMessage('Please fill in all fields.', 'error');
+        return;
+    }
+
+    const inputErrors = window.SecurityValidation.validateSignup({ fullName, email, contact, address, guardianName, username, password });
+    if (inputErrors.length) {
+        showMessage(inputErrors[0], 'error');
+        return;
+    }
+
+    if(password.length < 8){
+        showMessage('Password must be at least 8 characters.', 'error');
+        return;
+    }
+
+    if(password !== confirmPassword){
+        showMessage('Passwords do not match.', 'error');
+        return;
+    }
+
+    let result;
+    try {
+        result = await DB.signUp({ fullName, email, contact, address, guardianName, username, password });
+    } catch (e) {
+        showMessage('Could not reach the database. Please try again.', 'error');
+        return;
+    }
+
+    if(!result.ok){
+        showMessage(result.error, 'error');
+        return;
+    }
+
+    showMessage('Account created successfully! Redirecting to login...', 'success');
+    setTimeout(function(){
+        window.location.href = 'index.html';
+    }, 1200);
+}
+</script>
+
+
+<script>
+/* Automatically type form text in UPPERCASE.
+   This changes the actual field value, not just its appearance. */
+(function enableAutomaticUppercase(){
+    const fields = document.querySelectorAll('[data-auto-uppercase="true"]');
+    fields.forEach(field => {
+        field.addEventListener('input', function(){
+            const start = this.selectionStart;
+            const end = this.selectionEnd;
+            this.value = this.value.toUpperCase();
+            if (typeof start === 'number' && typeof end === 'number') {
+                try { this.setSelectionRange(start, end); } catch(e) {}
+            }
+        });
+
+        // Also uppercase any value already placed by autofill/prefill.
+        if (field.value) field.value = field.value.toUpperCase();
+    });
+})();
+</script>
+
+<script src="security-validation.js"></script>
+</body>
+</html>

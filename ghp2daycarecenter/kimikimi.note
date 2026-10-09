@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="g.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daycare Center Information System</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<!-- Decorative background -->
+<div class="bg-decor">
+    <div class="blob-topleft"></div>
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="sun"><div class="sun-ray"></div></div>
+    <div class="heart-deco"></div>
+    <div class="bunting"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="shelf-decor">
+        <div class="plant"></div>
+        <div class="pot"></div>
+    </div>
+    <div class="family-decor">
+        <div class="person p1"></div>
+        <div class="person p2"></div>
+        <div class="person p3"></div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="login-section">
+
+        <div class="logo">
+            <img src="g.png" alt="Daycare Logo">
+        </div>
+
+        <div class="system-label">INFORMATION SYSTEM</div>
+
+        <div class="login-box">
+
+            <div id="loginMessage" class="form-message" style="display:none;"></div>
+
+            <label for="role">Role</label>
+            <div class="field-wrap">
+                <span class="field-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21a8 8 0 0 0-16 0"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </span>
+                <select id="role">
+                    <option value="">Select Role</option>
+                    <option value="parent">Parent / Guardian</option>
+                    <option value="admin">Administrator / Teacher</option>
+                </select>
+                <span class="select-chevron">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </span>
+            </div>
+
+            <label for="username">Username</label>
+            <div class="field-wrap">
+                <span class="field-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21a8 8 0 0 0-16 0"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </span>
+                <input type="text" id="username" placeholder="Enter Username">
+            </div>
+
+            <label for="password">Password</label>
+            <div class="field-wrap">
+                <span class="field-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                </span>
+                <input type="password" id="password" placeholder="Enter Password">
+                <button type="button" class="toggle-eye" onclick="togglePassword()" aria-label="Toggle password visibility">
+                    <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+            </div>
+
+            <div class="forgot-link-wrap">
+                <a href="javascript:void(0)" onclick="openForgotModal()">Forgot Password?</a>
+            </div>
+
+            <button class="login-btn" onclick="login()">
+                Login
+            </button>
+
+            <div class="signup-section">
+                <p>Don't have an account?</p><button class="signup-btn" onclick="signup()">Sign Up</button>
+            </div>
+
+        </div>
+
+        <p class="copyright">
+            © 2026 Daycare Center Information System
+        </p>
+
+    </div>
+
+</div>
+
+<!-- Login loading -->
+<div class="login-loading" id="loginLoading" aria-live="polite" aria-busy="true">
+  <div class="login-loading-card">
+    <span class="login-loading-bear">🧸</span>
+    <div class="login-loading-title">Signing you in...</div>
+    <div class="login-loading-text" id="loginLoadingText">Checking your account</div>
+    <div class="login-loading-dots"><i></i><i></i><i></i></div>
+  </div>
+</div>
+
+<!-- ══════════ FORGOT PASSWORD MODAL ══════════ -->
+<div class="modal-overlay" id="forgotModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeForgotModal()">&#10005;</button>
+
+    <div class="modal-icon">&#128272;</div>
+    <div class="modal-title">Reset Your Password</div>
+    <div class="modal-subtitle">Confirm your role, username, and the email address on file to set a new password.</div>
+
+    <div id="forgotMessage" class="form-message" style="display:none;"></div>
+
+    <div class="form-row">
+        <div class="form-col">
+            <label for="fRole">Role</label>
+            <select id="fRole">
+                <option value="">Select Role</option>
+                <option value="parent">Parent / Guardian</option>
+                <option value="admin">Administrator / Teacher</option>
+            </select>
+        </div>
+        <div class="form-col">
+            <label for="fUsername">Username</label>
+            <input type="text" id="fUsername" placeholder="Your username">
+        </div>
+    </div>
+
+    <label for="fEmail">Email Address</label>
+    <input type="email" id="fEmail" placeholder="Enter the email on your account">
+
+    <hr class="modal-divider">
+
+    <div class="form-row">
+        <div class="form-col">
+            <label for="fNewPwd">New Password</label>
+            <input type="password" id="fNewPwd" placeholder="New password">
+        </div>
+        <div class="form-col">
+            <label for="fConfPwd">Confirm Password</label>
+            <input type="password" id="fConfPwd" placeholder="Confirm password">
+        </div>
+    </div>
+
+    <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeForgotModal()">Cancel</button>
+        <button class="login-btn" style="width:auto; padding:12px 26px;" onclick="submitForgotPassword()">Reset Password</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase.js"></script>
+<script src="db.js"></script>
+<script>
+
+function showMessage(text, type){
+    const box = document.getElementById('loginMessage');
+    box.textContent = text;
+    box.className = 'form-message ' + (type || 'error');
+    box.style.display = 'block';
+}
+
+function togglePassword(){
+    const pwd = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+    if(pwd.type === 'password'){
+        pwd.type = 'text';
+        eyeIcon.innerHTML = '<path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+    } else {
+        pwd.type = 'password';
+        eyeIcon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+    }
+}
+
+function setLoginLoading(show, text){
+    const overlay = document.getElementById('loginLoading');
+    const textEl = document.getElementById('loginLoadingText');
+    if (textEl && text) textEl.textContent = text;
+    if (overlay) overlay.classList.toggle('show', !!show);
+    document.body.classList.toggle('login-busy', !!show);
+}
+
+async function login(){
+    let role = document.getElementById("role").value;
+    let username = document.getElementById("username").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    if(role === ""){ showMessage("Please select a role.", "error"); return; }
+    if(username === "" || password === ""){ showMessage("Please enter username and password.", "error"); return; }
+
+    setLoginLoading(true, role === 'admin' ? 'Checking administrator access...' : 'Checking parent account...');
+    let result;
+    try {
+        result = await DB.login(username, password, role);
+        if(!result.ok){
+            setLoginLoading(false);
+            showMessage(result.error, "error");
+            return;
+        }
+
+        if(role === "admin"){
+            setLoginLoading(true, 'Preparing your dashboard...');
+            window.location.href = "Admin-dashboard.html";
+            return;
+        }
+
+        setLoginLoading(true, 'Checking enrollment status...');
+        const enrollment = await DB.getEnrollmentByParent(username);
+        if(!enrollment){
+            setLoginLoading(true, 'Opening enrollment form...');
+            window.location.href = "enrollment.html";
+        } else if(enrollment.status === "pending" || enrollment.status === "rejected"){
+            setLoginLoading(true, enrollment.status === 'pending' ? 'Checking application status...' : 'Opening application status...');
+            window.location.href = "enrollment-pending.html";
+        } else {
+            setLoginLoading(true, 'Preparing your child dashboard...');
+            window.location.href = "Parent-dashboard.html";
+        }
+    } catch (e) {
+        setLoginLoading(false);
+        showMessage("Could not reach the database. Please try again.", "error");
+    }
+}
+
+</script>
+
+<script>
+function signup(){
+    window.location.href="signup.html";
+}
+</script>
+
+<script>
+function openForgotModal(){
+    // Prefill role/username from the login form if already entered
+    document.getElementById('fRole').value = document.getElementById('role').value || '';
+    document.getElementById('fUsername').value = document.getElementById('username').value || '';
+    document.getElementById('fEmail').value = '';
+    document.getElementById('fNewPwd').value = '';
+    document.getElementById('fConfPwd').value = '';
+    hideForgotMessage();
+    document.getElementById('forgotModal').classList.add('show');
+}
+
+function closeForgotModal(){
+    document.getElementById('forgotModal').classList.remove('show');
+}
+
+function showForgotMessage(text, type){
+    const box = document.getElementById('forgotMessage');
+    box.textContent = text;
+    box.className = 'form-message ' + (type || 'error');
+    box.style.display = 'block';
+}
+
+function hideForgotMessage(){
+    document.getElementById('forgotMessage').style.display = 'none';
+}
+
+async function submitForgotPassword(){
+    const role = document.getElementById('fRole').value;
+    const username = document.getElementById('fUsername').value.trim();
+    const email = document.getElementById('fEmail').value.trim();
+    const newPwd = document.getElementById('fNewPwd').value;
+    const confPwd = document.getElementById('fConfPwd').value;
+
+    if(!role){
+        showForgotMessage('Please select a role.', 'error');
+        return;
+    }
+    if(!username || !email){
+        showForgotMessage('Please enter your username and email.', 'error');
+        return;
+    }
+    if(!newPwd || !confPwd){
+        showForgotMessage('Please enter and confirm your new password.', 'error');
+        return;
+    }
+    if(newPwd.length < 6){
+        showForgotMessage('New password must be at least 6 characters.', 'error');
+        return;
+    }
+    if(newPwd !== confPwd){
+        showForgotMessage('Passwords do not match.', 'error');
+        return;
+    }
+
+    let result;
+    try {
+        result = await DB.resetPassword(role, username, email, newPwd);
+    } catch (e) {
+        showForgotMessage('Could not reach the database. Please try again.', 'error');
+        return;
+    }
+    if(!result.ok){
+        showForgotMessage(result.error, 'error');
+        return;
+    }
+
+    showForgotMessage('Password reset! You can now log in with your new password.', 'success');
+    setTimeout(() => {
+        closeForgotModal();
+        document.getElementById('role').value = role;
+        document.getElementById('username').value = username;
+        document.getElementById('password').value = '';
+        showMessage('Password reset successfully. Please log in.', 'success');
+    }, 1200);
+}
+</script>
+
+</body>
+</html>

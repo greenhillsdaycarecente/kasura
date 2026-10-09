@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2f8f62">
+  <title>Thank You — Greenhills Daycare Center</title>
+  <link rel="stylesheet" href="logout.css">
+</head>
+<body>
+  <main class="logout-page" aria-live="polite">
+    <div class="logout-card">
+      <div class="logout-check" aria-hidden="true">✓</div>
+      <h1>Thank's, for visiting us</h1>
+      <p>You have been logged out successfully.</p>
+      <p class="redirect-note">Returning to the login page…</p>
+      <a class="login-link" href="index.html">Back to Login</a>
+    </div>
+  </main>
+  <script>
+    // Keep this page intentionally tiny so the logout transition appears immediately.
+    setTimeout(function () {
+      window.location.replace("index.html");
+    }, 1400);
+  </script>
+<script src="security-validation.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="g.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daycare Center - Application Status</title>
+    <link rel="stylesheet" href="enrollment-pending.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+</head>
+<body>
+
+<div class="status-card">
+    <img src="l.png" class="logo" alt="logo">
+
+    <div id="iconWrap" class="icon pending"><i class="fa-solid fa-hourglass-half"></i></div>
+
+    <h1 id="statusTitle">Application Under Review</h1>
+    <p id="statusText" class="muted">
+        Thank you for submitting your child's enrollment application.
+        The Administrator/Teacher is currently reviewing it. You'll be able
+        to access your Parent Dashboard as soon as it's approved.
+    </p>
+
+    <div class="summary" id="summary"></div>
+
+    <div id="rejectedActions" style="display:none;">
+        <button class="btn-primary" onclick="window.location.href='enrollment.html'">
+            <i class="fa-solid fa-pen"></i> Edit &amp; Resubmit Application
+        </button>
+    </div>
+
+    <button class="btn-secondary" onclick="refresh()"><i class="fa-solid fa-rotate"></i> Refresh Status</button>
+    <button class="logout-link" onclick="logout()">Logout</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase.js"></script>
+<script src="db.js"></script>
+<script>
+const currentUser = DB.currentUser();
+if(!currentUser || currentUser.role !== 'parent'){
+    window.location.href = 'index.html';
+}
+
+async function refresh(){
+    const rec = await DB.getEnrollmentByParent(currentUser.username);
+    if(!rec){
+        window.location.href = 'enrollment.html';
+        return;
+    }
+    if(rec.status === 'approved'){
+        window.location.href = 'Parent-dashboard.html';
+        return;
+    }
+
+    const icon = document.getElementById('iconWrap');
+    const title = document.getElementById('statusTitle');
+    const text = document.getElementById('statusText');
+    const summary = document.getElementById('summary');
+    const rejectedActions = document.getElementById('rejectedActions');
+
+    summary.innerHTML =
+        '<p><strong>Child Name:</strong> ' + rec.firstName + ' ' + rec.lastName + '</p>' +
+        '<p><strong>Submitted:</strong> ' + new Date(rec.submittedAt).toLocaleString() + '</p>';
+
+    if(rec.status === 'rejected'){
+        icon.className = 'icon rejected';
+        icon.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+        title.textContent = 'Application Not Approved';
+        text.textContent = 'Your application was not approved by the Administrator/Teacher. Please review the reason below, make corrections, and resubmit.';
+        summary.innerHTML += '<p class="reject-reason"><strong>Reason:</strong> ' + rec.rejectReason + '</p>';
+        rejectedActions.style.display = 'block';
+    } else {
+        icon.className = 'icon pending';
+        icon.innerHTML = '<i class="fa-solid fa-hourglass-half"></i>';
+        title.textContent = 'Application Under Review';
+        rejectedActions.style.display = 'none';
+    }
+}
+
+function logout(){ DB.logout(); window.location.replace('logout.html'); }
+
+refresh();
+</script>
+
+<script src="security-validation.js"></script>
+</body>
+</html>

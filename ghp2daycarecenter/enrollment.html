@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="g.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daycare Center - Enrollment Form</title>
+    <link rel="stylesheet" href="enrollment.css?v=20260907-consent">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+</head>
+<body>
+
+<header class="topbar">
+    <div class="topbar-brand">
+        <img src="l.png" alt="logo">
+        <span>Greenhills Phase II Daycare Center — Enrollment Form</span>
+    </div>
+    <button class="logout-btn" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+</header>
+
+<!-- Mandatory parent/guardian consent gate -->
+<div id="consentGate" class="consent-gate" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
+    <div class="consent-modal">
+        <div class="consent-header">
+            <div>
+                <h2 id="consentTitle">Terms and Conditions &amp; Parent/Guardian Consent</h2>
+                <p>Please read the information below before accessing the enrollment form.</p>
+            </div>
+        </div>
+
+        <div class="consent-body">
+            <section class="terms-section">
+                <h3>1. About the Greenhills Phase II Daycare Center Information System</h3>
+                <p>
+                    The Greenhills Phase II Daycare Center Information System is a web-based information system
+                    developed to assist the Daycare Center in managing child enrollment, records, monitoring, and
+                    developmental information in a more organized, accurate, secure, and efficient manner. The
+                    system is designed to reduce errors associated with manual and spreadsheet-based recording and
+                    to support accurate and accessible information for authorized users.
+                </p>
+
+                <h3>2. Information Collected</h3>
+                <p>The system may collect and store information necessary for enrollment and daycare management, including:</p>
+                <ul>
+                    <li>Child's full name, date of birth, gender, address, and nickname;</li>
+                    <li>Child photo, birth certificate, medical certificate, and other submitted document information, when provided;</li>
+                    <li>Parent/guardian name, relationship, contact number, and address;</li>
+                    <li>Emergency contact information; and</li>
+                    <li>Enrollment status, class/session information, developmental evaluations, performance results, teacher comments, and related progress information.</li>
+                </ul>
+
+                <h3>3. Purpose and Capabilities of the System</h3>
+                <p>The information provided will be used to support the following daycare-related activities:</p>
+                <ul>
+                    <li>Processing and managing child enrollment applications;</li>
+                    <li>Organizing and maintaining child and enrollment records;</li>
+                    <li>Automatically calculating the child's age based on the date of birth;</li>
+                    <li>Supporting age-based eligibility verification for enrollment;</li>
+                    <li>Providing parents/guardians with access to their child's enrollment information and progress;</li>
+                    <li>Recording and monitoring child developmental milestones, evaluations, and teacher comments;</li>
+                    <li>Generating and printing organized performance reports; and</li>
+                    <li>Providing reports and analytics to assist authorized Daycare Center personnel in evaluating child development and making informed administrative decisions.</li>
+                </ul>
+
+                <h3>4. Role-Based Access, Storage, and Protection</h3>
+                <p>
+                    Access to information is controlled according to the user's assigned role and responsibilities.
+                    Parents/guardians may only view information related to their own child and cannot access, edit, or modify the records of their child or other students. They may print their own child's authorized records, including developmental and performance records, while teachers and
+                    administrators may access and manage records.
+                    Role-based permissions help protect essential child and enrollment information from unauthorized
+                    access. Reasonable administrative and technical measures are used to help protect information
+                    from unauthorized access, alteration, disclosure, or misuse.
+                </p>
+
+                <h3>5. Automated Age Calculation and Eligibility Verification</h3>
+                <p>
+                    The system may automatically calculate the child's age using the date of birth provided during
+                    enrollment. The calculated age may be used to support age-based eligibility verification and
+                    enrollment processing. This capability is intended to improve accuracy, reduce manual computation,
+                    speed up verification, and promote consistent processing of enrollment applications. The accuracy
+                    of the calculation and eligibility result depends on the correctness of the information provided.
+                </p>
+
+                <h3>6. Enrollment Monitoring and Child Progress</h3>
+                <p>
+                    The system allows parents/guardians to monitor their child's enrollment information and status
+                    through their account. Parents/guardians may also view available information about their child's
+                    assigned class/session and developmental progress. Authorized teachers and administrators may
+                    record evaluations, milestones, observations, performance results, and comments. This capability
+                    is intended to encourage parent involvement and provide organized information about the child's
+                    growth, achievements, and development.
+                </p>
+
+                <h3>7. Reports and Analytics</h3>
+                <p>
+                    The system may generate and print performance reports containing authorized developmental
+                    evaluation results, progress information, and teacher comments. Reports and analytics are intended
+                    to support the evaluation of each child's growth and development and provide organized information
+                    that teachers and parents can use to view achievements and progress. Authorized administrators and
+                    teachers may also use aggregated or appropriate system information to support data-driven decisions
+                    and daycare program enhancement.
+                </p>
+
+                <h3>8. Parent/Guardian Responsibility</h3>
+                <p>
+                    The parent/guardian is responsible for providing accurate, complete, and truthful information and
+                    for ensuring that they are authorized to provide the child's information for enrollment. If an
+                    error is discovered or information changes, the parent/guardian should inform the Daycare Center
+                    so the appropriate record can be reviewed and corrected by authorized personnel.
+                </p>
+
+                <h3>9. Parent/Guardian Consent</h3>
+                <p>
+                    By selecting <strong>“I Agree and Continue”</strong>, you confirm that you are the parent/guardian
+                    or an authorized representative of the child identified in the enrollment application. You
+                    voluntarily consent to the collection, storage, processing, access, and authorized use of the
+                    child's and guardian's information for the legitimate daycare-related purposes and system
+                    capabilities described above.
+                </p>
+                <p>
+                    You understand that the system uses role-based permissions to limit access according to user
+                    responsibilities, automatically calculates age and supports eligibility verification, provides
+                    enrollment and child-progress monitoring, organizes child records, and generates reports and
+                    analytics for authorized daycare personnel. You also understand that developmental evaluations,
+                    performance information, and teacher comments may be recorded by authorized personnel and made
+                    available to you through your parent account.
+                </p>
+                <p>
+                    Your consent is required before you can access and submit the enrollment form through this system.
+                    If you select <strong>“I Do Not Agree”</strong>, you will not be allowed to proceed with enrollment
+                    through the system.
+                </p>
+            </section>
+
+        <div class="consent-confirmation">
+                <label class="consent-check-row" for="consentCheckbox">
+                    <input type="checkbox" id="consentCheckbox">
+                    <span>
+                        I have read and understood the Terms and Conditions. I am the parent/guardian or
+                        authorized representative of the child, and I consent to the collection, storage, processing,
+                        access, and authorized use of the child's information for enrollment, age and eligibility
+                        verification, progress monitoring, performance evaluation, reporting, and daycare administration.
+                    </span>
+                </label>
+                <p id="consentHint" class="consent-hint">Please check the box to enable “I Agree and Continue”.</p>
+            </div>
+        </div>
+
+        <div class="consent-footer">
+            <button type="button" class="consent-decline" id="declineConsentBtn">
+                <i class="fa-solid fa-xmark"></i> I Do Not Agree
+            </button>
+            <button type="button" class="consent-agree" id="agreeConsentBtn" disabled>
+                <i class="fa-solid fa-check"></i> I Agree and Continue
+            </button>
+        </div>
+    </div>
+</div>
+
+    <div class="tabs">
+        <div class="tab active" data-tab="personal">Child Information</div>
+        <div class="tab" data-tab="documents">Documents</div>
+        <div class="tab" data-tab="emergency">Guardian/Emergency Contact</div>
+    </div>
+
+    <div class="tab-content-wrap">
+
+        <!-- PERSONAL INFORMATION -->
+        <section class="tab-panel active" id="panel-personal">
+            <div class="grid-3">
+                <div class="field">
+                    <label>First Name *</label>
+                    <input type="text" id="firstName" data-auto-uppercase="true">
+                </div>
+                <div class="field">
+                    <label>Middle Name</label>
+                    <input type="text" id="middleName" data-auto-uppercase="true">
+                </div>
+                <div class="field">
+                    <label>Last Name *</label>
+                    <input type="text" id="lastName" data-auto-uppercase="true">
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="field">
+                    <label>Date of Birth *</label>
+                    <input type="date" id="dob">
+                </div>
+                <div class="field">
+                    <label>Gender *</label>
+                    <select id="gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Address *</label>
+                <input type="text" id="childAddress" data-auto-uppercase="true">
+            </div>
+
+            <div class="field">
+                <label>Nickname</label>
+                <input type="text" id="nickname" data-auto-uppercase="true">
+            </div>
+        </section>
+
+        <!-- DOCUMENTS -->
+        <section class="tab-panel" id="panel-documents">
+            <div class="grid-2">
+                <div class="field">
+                    <label>PSA Birth Certificate</label>
+                    <input type="file" id="docBirthCert">
+                </div>
+                <div class="field">
+                    <label>Medical Certificate</label>
+                    <input type="file" id="docMedicalCert">
+                </div>
+            </div>
+            <div class="note-inline">
+                <i class="fa-solid fa-circle-info"></i>
+                Uploaded file names are recorded with your application; the Administrator/Teacher will
+                verify physical or emailed copies separately.
+            </div>
+        </section>
+
+        <!-- GUARDIAN / EMERGENCY CONTACT -->
+        <section class="tab-panel" id="panel-emergency">
+            <div class="section-subtitle" style="font-size:16px;font-weight:800;color:#1E3A8A;margin-bottom:14px;">Guardian Information</div>
+            <div class="grid-2">
+                <div class="field">
+                    <label>Guardian Name *</label>
+                    <input type="text" id="guardianName" data-auto-uppercase="true">
+                </div>
+                <div class="field">
+                    <label>Relationship to Child *</label>
+                    <select id="guardianRelationship" data-auto-uppercase="true" required>
+                        <option value="">Select Relationship</option>
+                        <option value="FATHER">Father</option>
+                        <option value="MOTHER">Mother</option>
+                        <option value="SIBLING">Sibling</option>
+                        <option value="GRANDPARENT">Grandparent</option>
+                        <option value="AUNT">Aunt</option>
+                        <option value="UNCLE">Uncle</option>
+                    </select>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="field">
+                    <label>Primary Contact Number *</label>
+                    <input type="text" id="guardianPhone" data-auto-uppercase="true">
+                </div>
+                <div class="field">
+                    <label>Alternate Contact Number</label>
+                    <input type="text" id="guardianAltPhone" data-auto-uppercase="true">
+                </div>
+            </div>
+            <div class="field">
+                <label>Guardian Contact Address *</label>
+                <input type="text" id="guardianAddress" data-auto-uppercase="true">
+            </div>
+
+            <div class="section-subtitle emergency-heading" style="font-size:16px;font-weight:800;color:#1E3A8A;margin:24px 0 14px;">
+                <span>Emergency Contact Information</span>
+                <label class="same-contact-check">
+                    <input type="checkbox" id="sameAsGuardian">
+                    <span>Same as Parent/Guardian Contact</span>
+                </label>
+            </div>
+            <div class="grid-2">
+                <div class="field">
+                    <label>Emergency Contact Name *</label>
+                    <input type="text" id="emName" data-auto-uppercase="true">
+                </div>
+                <div class="field">
+                    <label>Relationship to Child *</label>
+                    <select id="emRelationship" data-auto-uppercase="true" required>
+                        <option value="">Select Relationship</option>
+                        <option value="FATHER">Father</option>
+                        <option value="MOTHER">Mother</option>
+                        <option value="SIBLING">Sibling</option>
+                        <option value="GRANDPARENT">Grandparent</option>
+                        <option value="AUNT">Aunt</option>
+                        <option value="UNCLE">Uncle</option>
+                        <option value="NIECE">Niece</option>
+                        <option value="NEPHEW">Nephew</option>
+                        <option value="OTHER RELATIVES">Other Relatives</option>
+                    </select>
+                    <input type="text" id="emOtherRelationship" data-auto-uppercase="true" placeholder="Please specify relationship" style="display:none;margin-top:8px;" autocomplete="off">
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="field">
+                    <label>Primary Contact Number *</label>
+                    <input type="text" id="emPhone" data-auto-uppercase="true">
+                </div>
+                <div class="field">
+                    <label>Alternate Contact Number</label>
+                    <input type="text" id="emAltPhone" data-auto-uppercase="true">
+                </div>
+            </div>
+            <div class="field">
+                <label>Emergency Contact Address *</label>
+                <input type="text" id="emAddress" data-auto-uppercase="true">
+            </div>
+        </section>
+
+    </div>
+
+    <div class="actions">
+        <button class="btn-secondary" onclick="goTab(-1)">Back</button>
+        <button class="btn-secondary" id="nextBtn" onclick="goTab(1)">Next</button>
+        <button class="btn-primary" id="submitBtn" onclick="submitEnrollment()"><i class="fa-solid fa-paper-plane"></i> Submit Application</button>
+    </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase.js"></script>
+<script src="db.js?v=20260907-consent"></script>
+<script>
+const currentUser = DB.currentUser();
+if(!currentUser || currentUser.role !== 'parent'){
+    window.location.href = 'index.html';
+}
+
+// If parent already has an approved/pending enrollment, redirect appropriately
+(async function checkExisting(){
+    if(!currentUser) return;
+    const existing = await DB.getEnrollmentByParent(currentUser.username);
+    if(existing && existing.status === 'approved'){
+        window.location.href = 'Parent-dashboard.html';
+    } else if(existing && existing.status === 'pending'){
+        window.location.href = 'enrollment-pending.html';
+    } else if(existing && existing.status === 'rejected'){
+        // Prefill the form so the parent can correct and resubmit
+        prefill(existing);
+    }
+})();
+
+function prefill(rec){
+    document.getElementById('firstName').value = rec.firstName || '';
+    document.getElementById('middleName').value = rec.middleName || '';
+    document.getElementById('lastName').value = rec.lastName || '';
+    document.getElementById('dob').value = rec.dob || '';
+    document.getElementById('gender').value = rec.gender || 'Male';
+    document.getElementById('childAddress').value = rec.childAddress || '';
+    document.getElementById('nickname').value = rec.nickname || '';
+    document.getElementById('emName').value = rec.emName || '';
+    const savedEmRelationship = rec.emRelationship || '';
+    const emRelationshipSelect = document.getElementById('emRelationship');
+    const emOtherRelationship = document.getElementById('emOtherRelationship');
+    const relationshipOptions = Array.from(emRelationshipSelect.options).map(o => o.value);
+    if (relationshipOptions.includes(savedEmRelationship)) {
+        emRelationshipSelect.value = savedEmRelationship;
+    } else if (savedEmRelationship) {
+        emRelationshipSelect.value = 'OTHER RELATIVES';
+        emOtherRelationship.value = savedEmRelationship;
+        emOtherRelationship.style.display = 'block';
+    }
+    document.getElementById('emPhone').value = rec.emPhone || '';
+    document.getElementById('emAltPhone').value = rec.emAltPhone || '';
+    document.getElementById('emAddress').value = rec.emAddress || '';
+    if(rec.photoDataUrl){
+        document.getElementById('photoBox').innerHTML = '<img src="'+rec.photoDataUrl+'">';
+    }
+    showPageMessage('Your previous application was rejected' + (rec.rejectReason ? (': ' + rec.rejectReason) : '') + '. Please review and resubmit.', 'error');
+}
+
+let photoDataUrl = null;
+function previewPhoto(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){
+        photoDataUrl = ev.target.result;
+        document.getElementById('photoBox').innerHTML = '<img src="'+photoDataUrl+'">';
+    };
+    reader.readAsDataURL(file);
+}
+
+// Tab switching
+const tabs = document.querySelectorAll('.tab');
+const tabOrder = ['personal','documents','emergency'];
+tabs.forEach(t => t.addEventListener('click', () => setTab(t.dataset.tab)));
+
+function setTab(name){
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+
+    // Hide the Next button on the final Guardian/Emergency Contact step.
+    // The user can still go Back or submit the application.
+    const nextBtn = document.getElementById('nextBtn');
+    if(nextBtn){
+        nextBtn.style.display = name === 'emergency' ? 'none' : '';
+    }
+}
+
+function goTab(dir){
+    const current = document.querySelector('.tab.active').dataset.tab;
+    let idx = tabOrder.indexOf(current) + dir;
+    idx = Math.max(0, Math.min(tabOrder.length - 1, idx));
+    setTab(tabOrder[idx]);
+}
+
+function showPageMessage(text, type){
+    const box = document.getElementById('pageMessage');
+    box.textContent = text;
+    box.className = 'form-message ' + (type || 'error');
+    box.style.display = 'block';
+    window.scrollTo({top:0, behavior:'smooth'});
+}
+
+async function submitEnrollment(){
+    // Hard client-side gate: enrollment cannot be submitted without explicit consent.
+    if (!hasEnrollmentConsent()) {
+        showPageMessage('You must read and agree to the Terms and Conditions before submitting the enrollment application.', 'error');
+        openConsentGate();
+        return;
+    }
+
+    const submitBtn = document.getElementById('submitBtn');
+    if (submitBtn && submitBtn.disabled) return;
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const dob = document.getElementById('dob').value;
+    const childAddress = document.getElementById('childAddress').value.trim();
+    const guardianName = document.getElementById('guardianName').value.trim();
+    const guardianRelationship = document.getElementById('guardianRelationship').value.trim();
+    const guardianPhone = document.getElementById('guardianPhone').value.trim();
+    const guardianAddress = document.getElementById('guardianAddress').value.trim();
+    const emName = document.getElementById('emName').value.trim();
+    const emRelationshipSelect = document.getElementById('emRelationship').value.trim();
+    const emOtherRelationship = document.getElementById('emOtherRelationship').value.trim();
+    const emRelationship = emRelationshipSelect === 'OTHER RELATIVES' ? emOtherRelationship : emRelationshipSelect;
+    const emPhone = document.getElementById('emPhone').value.trim();
+
+    if(!firstName || !lastName || !dob || !childAddress){
+        showPageMessage('Please complete all required fields in Personal Information.', 'error');
+        setTab('personal');
+        return;
+    }
+    if(!guardianName || !guardianRelationship || !guardianPhone || !guardianAddress || !emName || !emRelationship || !emPhone || !document.getElementById('emAddress').value.trim()){
+        showPageMessage('Please complete all required fields in Guardian/Emergency Contact.', 'error');
+        setTab('emergency');
+        return;
+    }
+    if(emRelationshipSelect === 'OTHER RELATIVES' && !emOtherRelationship){
+        showPageMessage('Please specify the emergency contact relationship.', 'error');
+        setTab('emergency');
+        document.getElementById('emOtherRelationship').focus();
+        return;
+    }
+
+    const form = {
+        firstName,
+        middleName: document.getElementById('middleName').value.trim(),
+        lastName,
+        dob,
+        gender: document.getElementById('gender').value,
+        childAddress,
+        nickname: document.getElementById('nickname').value.trim(),
+        photoDataUrl: photoDataUrl,
+        docBirthCert: fileName('docBirthCert'),
+        docMedicalCert: fileName('docMedicalCert'),
+        guardianName,
+        guardianRelationship,
+        guardianPhone,
+        guardianAltPhone: document.getElementById('guardianAltPhone').value.trim(),
+        guardianAddress,
+        emName, emRelationship, emPhone,
+        emAltPhone: document.getElementById('emAltPhone').value.trim(),
+        emAddress: document.getElementById('emAddress').value.trim(),
+        consentAgreed: true,
+        consentTimestamp: new Date().toISOString(),
+        consentVersion: '2026-09-07-v1',
+    };
+
+    try {
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+        }
+        await DB.createEnrollment(currentUser.username, form);
+        window.location.href = 'enrollment-pending.html';
+    } catch (e) {
+        console.error('Enrollment submission failed:', e);
+        const message = (e && e.message) ? e.message : 'Unknown database error.';
+        showPageMessage('Could not submit your application. ' + message, 'error');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Application';
+        }
+    }
+}
+
+function fileName(id){
+    const el = document.getElementById(id);
+    return (el.files && el.files[0]) ? el.files[0].name : null;
+}
+
+/* ===================== MANDATORY CONSENT GATE ===================== */
+const CONSENT_STORAGE_KEY = 'greenhills_enrollment_consent_v1';
+const CONSENT_VERSION = '2026-09-07-v1';
+
+function hasEnrollmentConsent(){
+    return sessionStorage.getItem(CONSENT_STORAGE_KEY) === CONSENT_VERSION;
+}
+
+function openConsentGate(){
+    const gate = document.getElementById('consentGate');
+    if (!gate) return;
+    gate.classList.add('is-open');
+    document.body.classList.add('consent-locked');
+    const checkbox = document.getElementById('consentCheckbox');
+    if (checkbox) checkbox.focus();
+}
+
+function closeConsentGate(){
+    const gate = document.getElementById('consentGate');
+    if (gate) gate.classList.remove('is-open');
+    document.body.classList.remove('consent-locked');
+}
+
+function showEnrollmentPage(){
+    const page = document.getElementById('enrollmentPage');
+    if (page) page.classList.add('consent-unlocked');
+    closeConsentGate();
+}
+
+function lockEnrollmentPage(){
+    const page = document.getElementById('enrollmentPage');
+    if (page) page.classList.remove('consent-unlocked');
+    openConsentGate();
+}
+
+(function setupConsentGate(){
+    const checkbox = document.getElementById('consentCheckbox');
+    const agreeBtn = document.getElementById('agreeConsentBtn');
+    const declineBtn = document.getElementById('declineConsentBtn');
+    const hint = document.getElementById('consentHint');
+
+    if (!checkbox || !agreeBtn || !declineBtn) return;
+
+    function syncAgreeButton(){
+        agreeBtn.disabled = !checkbox.checked;
+        if (hint) {
+            hint.textContent = checkbox.checked
+                ? 'Consent selected. You may now continue to the enrollment form.'
+                : 'Please check the box to enable “I Agree and Continue”.';
+            hint.classList.toggle('ready', checkbox.checked);
+        }
+    }
+
+    checkbox.addEventListener('change', syncAgreeButton);
+
+    agreeBtn.addEventListener('click', function(){
+        if (!checkbox.checked) return;
+        sessionStorage.setItem(CONSENT_STORAGE_KEY, CONSENT_VERSION);
+        showEnrollmentPage();
+    });
+
+    declineBtn.addEventListener('click', function(){
+        sessionStorage.removeItem(CONSENT_STORAGE_KEY);
+        const ok = window.confirm('You did not agree to the Terms and Conditions. You cannot submit an enrollment application without consent. Do you want to return to the login page?');
+        if (ok) {
+            window.location.href = 'index.html';
+        }
+    });
+
+    // The form is locked until consent is explicitly given in this session.
+    if (hasEnrollmentConsent()) {
+        checkbox.checked = true;
+        syncAgreeButton();
+        showEnrollmentPage();
+    } else {
+        checkbox.checked = false;
+        syncAgreeButton();
+        lockEnrollmentPage();
+    }
+})();
+
+function logout(){ DB.logout(); window.location.replace('logout.html'); }
+</script>
+
+
+<script>
+/* Automatically type registration text in UPPERCASE.
+   This changes the actual field value saved/submitted by the form. */
+(function enableAutomaticUppercase(){
+    const fields = document.querySelectorAll('[data-auto-uppercase="true"]');
+    fields.forEach(field => {
+        field.addEventListener('input', function(){
+            const start = this.selectionStart;
+            const end = this.selectionEnd;
+            this.value = this.value.toUpperCase();
+            if (typeof start === 'number' && typeof end === 'number') {
+                try { this.setSelectionRange(start, end); } catch(e) {}
+            }
+        });
+
+        // Uppercase existing/prefilled values too.
+        if (field.value) field.value = field.value.toUpperCase();
+    });
+})();
+
+
+/* Same as Parent/Guardian Contact functionality */
+(function setupSameAsGuardian(){
+    const checkbox = document.getElementById('sameAsGuardian');
+
+    const pairs = [
+        ['guardianName', 'emName'],
+        ['guardianRelationship', 'emRelationship'],
+        ['guardianPhone', 'emPhone'],
+        ['guardianAltPhone', 'emAltPhone'],
+        ['guardianAddress', 'emAddress']
+    ];
+
+    function copyGuardianToEmergency(){
+        pairs.forEach(([guardianId, emergencyId]) => {
+            const guardian = document.getElementById(guardianId);
+            const emergency = document.getElementById(emergencyId);
+            if (guardian && emergency) {
+                emergency.value = guardian.value.toUpperCase();
+                emergency.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+        });
+    }
+
+    function updateEmergencyFields(){
+        const checked = checkbox.checked;
+        const otherRelationship = document.getElementById('emOtherRelationship');
+
+        if (checked) {
+            copyGuardianToEmergency();
+        }
+
+        pairs.forEach(([, emergencyId]) => {
+            const emergency = document.getElementById(emergencyId);
+            if (emergency) {
+                emergency.readOnly = checked;
+                emergency.style.backgroundColor = checked ? '#f1f5f9' : '';
+                emergency.style.cursor = checked ? 'not-allowed' : '';
+            }
+        });
+
+        if (otherRelationship) {
+            const isOther = document.getElementById('emRelationship').value === 'OTHER RELATIVES';
+            otherRelationship.style.display = isOther ? 'block' : 'none';
+            otherRelationship.disabled = checked;
+            otherRelationship.readOnly = checked;
+            otherRelationship.style.backgroundColor = checked ? '#f1f5f9' : '';
+            otherRelationship.style.cursor = checked ? 'not-allowed' : '';
+        }
+    }
+
+    // Show a custom text box when Emergency Relationship is "Other Relatives".
+    const emergencyRelationship = document.getElementById('emRelationship');
+    if (emergencyRelationship) {
+        emergencyRelationship.addEventListener('change', () => {
+            const otherRelationship = document.getElementById('emOtherRelationship');
+            const isOther = emergencyRelationship.value === 'OTHER RELATIVES';
+            if (otherRelationship) {
+                otherRelationship.style.display = isOther ? 'block' : 'none';
+                if (!isOther) otherRelationship.value = '';
+                otherRelationship.disabled = checkbox.checked;
+                otherRelationship.readOnly = checkbox.checked;
+            }
+        });
+    }
+
+    // Clicking the checkbox immediately copies all Guardian information.
+    checkbox.addEventListener('change', updateEmergencyFields);
+
+    // Keep Emergency Contact synchronized while the checkbox is checked.
+    pairs.forEach(([guardianId]) => {
+        const guardian = document.getElementById(guardianId);
+        if (guardian) {
+            guardian.addEventListener('input', function(){
+                if (checkbox.checked) copyGuardianToEmergency();
+            });
+        }
+    });
+
+    updateEmergencyFields();
+})();
+
+
+</script>
+
+</body>
+</html>
